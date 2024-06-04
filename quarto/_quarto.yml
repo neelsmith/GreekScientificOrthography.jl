@@ -5,7 +5,7 @@ theme: spacelab
 execute:
   freeze: auto
 date: last-modified  
-margin-header: "⚠️ *Draft release.*"
+margin-header: "⚠️ *Early work in progress on unpublished package: pre-0.1.0 release*"
 format:
   html: 
     toc: true

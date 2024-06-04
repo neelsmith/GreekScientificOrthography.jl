@@ -6,13 +6,13 @@ Look it up here.
 
 
 
-`f` 
+`stemortho` 
 
 :::{.callout-note appearance="minimal"}
 ```{julia}
 #| echo: false
 #| warning: false
-using YourPackage
-@doc f
+using GreekScientificOrthography
+@doc stemortho
 ```
 :::

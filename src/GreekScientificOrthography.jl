@@ -31,6 +31,8 @@ export codepoints, tokentypes, tokenize
 
 export augment, augment_initial, augment_medial
 
+export stemortho
+
 include("ortho.jl")
 include("lexical.jl")
 

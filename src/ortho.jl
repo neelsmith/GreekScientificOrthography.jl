@@ -31,7 +31,7 @@ Instantiate a GreekMathOrthography with correct code points and token types.
 
 $(SIGNATURES)
 """
-function msGreek()
+function stemortho()
     cps = alphabetic() * " \t\n" * punctuation()
     ttypes = [
         Orthography.LexicalToken,
