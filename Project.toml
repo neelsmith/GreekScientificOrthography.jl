@@ -1,0 +1,10 @@
+name = "GreekScientificOrthography"
+uuid = "049fe880-56b1-44e6-a5bf-3b4decaa7e2d"
+authors = ["Neel Smith <dnsmith.neel@gmail.com>"]
+version = "0.1.0"
+
+[deps]
+Orthography = "0b4c9448-09b0-4e78-95ea-3eb3328be36d"
+
+[compat]
+Orthography = "0.22"
