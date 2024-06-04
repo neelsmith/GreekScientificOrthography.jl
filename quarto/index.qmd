@@ -1,7 +1,8 @@
 ---
-title: "GreekScientificOrthography.jl"
+title: "GreekMathOrthography.jl"
 ---
 
+> An orthographic system for ancient Greek mathematical and scientific texts.
 
 | | Learning the package | Using the package |
 | --- | --- | --- |

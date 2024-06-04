@@ -3,4 +3,4 @@ title: Concepts
 ---
 
 
-Grok GreekScientificOrthography.
+Grok GreekMathOrthography.
