@@ -1,5 +1,5 @@
 ---
-title: "GreekMathOrthography.jl"
+title: "GreekScientificOrthography.jl"
 ---
 
 > An orthographic system for ancient Greek mathematical and scientific texts.

@@ -12,7 +12,7 @@ format:
 
 
 website:
-  title: "GreekMathOrthography"
+  title: "GreekScientificOrthography"
   navbar:
     background: primary
     search: true

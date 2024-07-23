@@ -2,4 +2,4 @@
 title: "Guides"
 ---
 
-Recipe book for working with `GreekMathOrthography.jl`
+Recipe book for working with `GreekScientificOrthography.jl`
