@@ -4,6 +4,7 @@ struct GreekMathOrthography <: PolytonicGreek.GreekOrthography
     tokencategories
 end
 
+
 """Assign value for OrthographyTrait"""
 OrthographyTrait(::Type{GreekMathOrthography}) = IsOrthographicSystem()
 
@@ -23,6 +24,7 @@ $(SIGNATURES)
 """
 function tokentypes(ortho::GreekMathOrthography)
     ortho.tokencategories
+
 end
 
 
@@ -36,7 +38,9 @@ function stemortho()
     ttypes = [
         Orthography.LexicalToken,
         Orthography.PunctuationToken,
-        Orthography.UnanalyzedToken
+        Orthography.UnanalyzedToken,
+        FigureLabelToken,
+        MilesianIntegerToken
     ]
     GreekMathOrthography(cps, ttypes)
 end
@@ -65,15 +69,22 @@ function splitPunctuation(s::AbstractString)
     filter(s -> ! isempty(s), [trimmed, punct])
 end
 
+function numeric()
+     "′ϛϙϡΜ𐅵𐅷𐅸"
+end
+
 
 """Compose a string with all alphabetic characters.
 
 $(SIGNATURES)
 
-Adds character for second grave accent, and for "extra" diaeresis.
 """
 function alphabetic()
-    string(PolytonicGreek.alphabetic(), "⸌", "+")
+    PolytonicGreek.alphabetic()
+end
+
+function alphabet()
+    "αβγδεζηθικλμνξοπρστυφχψω"
 end
 
 """Compose a string with all punctuation characters.
@@ -83,7 +94,7 @@ $(SIGNATURES)
 Adds character for unit-ending mark.
 """
 function punctuation()
-    string(PolytonicGreek.punctuation(), "⁑‡¶")
+    PolytonicGreek.punctuation()
 end
 
 """

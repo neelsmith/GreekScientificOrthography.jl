@@ -3,3 +3,15 @@ title: Tutorials
 ---
 
 Learn `GreekMathOrthography.jl`.
+
+This is the a good stress test:
+
+From Archimedes, *Dim.Circ* prop. 3:
+
+
+
+Ὡς ἄρα συναμφότερος ἡ ΖΕ, ΕΓ πρὸς ΖΓ, ἡ ΕΓ πρὸς ΓΗ· ὥστε ἡ ΓΕ πρὸς ΓΗ μείζονα λόγον ἔχει ἤπερ φ̅ο̅α̅ πρὸς ρ̅ν̅γ̅. Ἡ ΕΗ ἄρα πρὸς ΗΓ δυνάμει λόγον ἔχει, 
+
+How should we handle these big numbers?
+
+> ὃν Μ< 10λδ > ͵̅θ̅υ̅ν̅ πρὸς Μ< 10β > ͵̅γ̅υ̅θ̅· μήκει ἄρα, ὃν φ̅Ϙ̅α̅ ηʹ πρὸς ρ̅ν̅γ̅.

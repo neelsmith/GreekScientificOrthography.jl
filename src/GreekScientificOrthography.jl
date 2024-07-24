@@ -27,12 +27,16 @@ using Documenter, DocStringExtensions
 
 export GreekMathOrthography, stemortho
 
+export FigureLabelToken
+export GreekNumericToken, MilesianIntegerToken, MilesianFractionToken
+
 export codepoints, tokentypes, tokenize
 
 export augment, augment_initial, augment_medial
 
 export stemortho
 
+include("types.jl")
 include("ortho.jl")
 include("lexical.jl")
 

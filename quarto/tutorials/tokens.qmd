@@ -1,0 +1,14 @@
+# Tokens
+
+```{julia}
+#| warning: false
+using GreekScientificOrthography
+
+o = stemortho()
+typeof(o)
+```
+
+
+```{julia}
+tokentypes(o)
+```
