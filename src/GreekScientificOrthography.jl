@@ -37,6 +37,7 @@ export augment, augment_initial, augment_medial
 export stemortho
 
 include("types.jl")
+include("tokens.jl")
 include("ortho.jl")
 include("lexical.jl")
 
