@@ -2,7 +2,7 @@
 title: Tutorials
 ---
 
-Learn `GreekMathOrthography.jl`.
+Learn `GreekSciOrthography.jl`.
 
 This is the a good stress test:
 

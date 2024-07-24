@@ -1,4 +1,4 @@
-function rmaccents(s::AbstractString, ortho::GreekMathOrthography)
+function rmaccents(s::AbstractString, ortho::GreekSciOrthography)
 end
 
 function addacute(s::AbstractString)
@@ -9,24 +9,24 @@ function addcircumflex(s::AbstractString)
     PolytonicGreek.addcircumflex(s)
 end
 
-function accentsyllable(s::AbstractString, syll, ortho::GreekMathOrthography)  
+function accentsyllable(s::AbstractString, syll, ortho::GreekSciOrthography)  
     accentsyllable(s,syll,literaryGreek())
 end
 
-function augment(s::AbstractString, ortho::GreekMathOrthography)
+function augment(s::AbstractString, ortho::GreekSciOrthography)
     augment(s, literaryGreek())
 end
 
 #=
-function augment(ortho::GreekMathOrthography; s::AbstractString = "")
+function augment(ortho::GreekSciOrthography; s::AbstractString = "")
     PolytonicGreek.augment(literaryGreek(); s = s)
 end
 =#
-function augment_initial(ortho::GreekMathOrthography)
+function augment_initial(ortho::GreekSciOrthography)
     PolytonicGreek.nfkc("ἐ")
 end
 
 
-function augment_medial(ortho::GreekMathOrthography)
+function augment_medial(ortho::GreekSciOrthography)
     "ε"
 end

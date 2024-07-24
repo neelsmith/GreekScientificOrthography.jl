@@ -1,12 +1,12 @@
 "An orthographic system for texts in the pre-Euclidean Attic alphabet."
-struct GreekMathOrthography <: PolytonicGreek.GreekOrthography
+struct GreekSciOrthography <: PolytonicGreek.GreekOrthography
     codepoints
     tokencategories
 end
 
 
 """Assign value for OrthographyTrait"""
-OrthographyTrait(::Type{GreekMathOrthography}) = IsOrthographicSystem()
+OrthographyTrait(::Type{GreekSciOrthography}) = IsOrthographicSystem()
 
 
 
@@ -14,7 +14,7 @@ OrthographyTrait(::Type{GreekMathOrthography}) = IsOrthographicSystem()
 
     $(SIGNATURES)    
     """
-function codepoints(ortho::GreekMathOrthography)
+function codepoints(ortho::GreekSciOrthography)
     ortho.codepoints
 end
 
@@ -22,19 +22,19 @@ end
 
 $(SIGNATURES)    
 """
-function tokentypes(ortho::GreekMathOrthography)
+function tokentypes(ortho::GreekSciOrthography)
     ortho.tokencategories
 
 end
 
 
 """
-Instantiate a GreekMathOrthography with correct code points and token types.
+Instantiate a GreekSciOrthography with correct code points and token types.
 
 $(SIGNATURES)
 """
 function stemortho()
-    cps = alphabetic() * " \t\n" * punctuation()
+    cps = alphabetic() * " \t\n" * punctuation() * numeric() * astro() |> unique
     ttypes = [
         Orthography.LexicalToken,
         Orthography.PunctuationToken,
@@ -42,7 +42,7 @@ function stemortho()
         FigureLabelToken,
         MilesianIntegerToken
     ]
-    GreekMathOrthography(cps, ttypes)
+    GreekSciOrthography(cps, ttypes)
 end
 
 """
@@ -50,7 +50,7 @@ Tokenize a string in orthography of HMT Greek MSS.
 
 $(SIGNATURES)  
 """
-function tokenize(s::AbstractString, o::GreekMathOrthography)
+function tokenize(s::AbstractString, o::GreekSciOrthography)
     wsdelimited = split(s)
     depunctuated = map(s -> splitPunctuation(s), wsdelimited)
     tknstrings = collect(Iterators.flatten(depunctuated))
@@ -73,6 +73,15 @@ function numeric()
      "′ϛϙϡΜ𐅵𐅷𐅸"
 end
 
+
+
+function astro()
+    planets = "🜚︎☽︎☿♀♂♃♄"
+    zodiac = "♈︎♉︎♊︎♋︎♌︎♍︎♎︎♏︎♐︎♑︎♒︎♓︎"
+
+    planets * zodiac
+
+end
 
 """Compose a string with all alphabetic characters.
 
@@ -98,7 +107,7 @@ function punctuation()
 end
 
 """
-Create correct OrthographicToken for a given string in GreekMathOrthography.
+Create correct OrthographicToken for a given string in GreekSciOrthography.
 
 $(SIGNATURES)    
 """
@@ -156,7 +165,7 @@ Alphabetically sort a list of words in Unicode Greek.
 
 $(SIGNATURES)
 """
-function sortWords(words, ortho::GreekMathOrthography)
+function sortWords(words, ortho::GreekSciOrthography)
     sortWords(words, literaryGreek())
     #=
     strippedpairs = map(wd -> ( lowercase(Unicode.normalize(wd, stripmark=true)), wd),words)

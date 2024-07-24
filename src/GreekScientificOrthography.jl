@@ -25,7 +25,7 @@ import PolytonicGreek: augment_medial
 
 using Documenter, DocStringExtensions
 
-export GreekMathOrthography, stemortho
+export GreekSciOrthography, stemortho
 
 export FigureLabelToken
 export GreekNumericToken, MilesianIntegerToken, MilesianFractionToken
@@ -41,4 +41,4 @@ include("tokens.jl")
 include("ortho.jl")
 include("lexical.jl")
 
-end # module GreekMathOrthography
+end # module GreekSciOrthography

@@ -29,7 +29,7 @@ website:
         file: reference/index.qmd  
     right:   
       - icon: github
-        href: https://github.com/neelsmith/GreekMathOrthography.jl
+        href: https://github.com/neelsmith/GreekSciOrthography.jl
         aria-label: GitHub
 
   sidebar:

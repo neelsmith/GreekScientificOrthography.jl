@@ -4,5 +4,12 @@ title: Concepts
 
 
 - a subtype of `GreekOrthography`
+- semi-case-sensitive
 - recognizes scientific symbols: astronomical glyphs, numeric markers
-- tokenization treats all-uppercase tokens < some length as label types for figures
+
+
+## Types
+
+- figure labels: tokenization treats all-uppercase tokens < some length as label types for figures
+- milesian integers:
+- milesian fractions
