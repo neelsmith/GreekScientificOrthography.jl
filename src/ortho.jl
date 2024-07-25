@@ -4,21 +4,17 @@ struct GreekSciOrthography <: PolytonicGreek.GreekOrthography
     tokencategories::Vector{DataType}
 end
 
-
-"""Assign value for OrthographyTrait"""
+"""Assign value for `OrthographyTrait`"""
 OrthographyTrait(::Type{GreekSciOrthography}) = IsOrthographicSystem()
 
-
-
-"""Implement Orthography's codepoints function.
-
-    $(SIGNATURES)    
-    """
+"""Implement Orthography's `codepoints` function for `GreekSciOrthography`.
+$(SIGNATURES)    
+"""
 function codepoints(ortho::GreekSciOrthography)
     ortho.codepoints
 end
 
-"""Implement Orthography's tokentypes function for AtticOrthography.
+"""Implement Orthography's `tokentypes` function for GreekSciOrthography.
 
 $(SIGNATURES)    
 """
@@ -28,7 +24,7 @@ end
 
 
 """
-Instantiate a GreekSciOrthography with correct code points and token types.
+Instantiate a `GreekSciOrthography` with correct code points and token types.
 
 $(SIGNATURES)
 """
@@ -46,7 +42,7 @@ function stemortho()
 end
 
 """
-Tokenize a string in orthography of HMT Greek MSS.
+Tokenize a string in Greek scientific orthography.
 
 $(SIGNATURES)  
 """
@@ -54,8 +50,11 @@ function tokenize(s::AbstractString, o::GreekSciOrthography)
     wsdelimited = split(s)
     depunctuated = map(s -> splitPunctuation(s), wsdelimited)
     tknstrings = collect(Iterators.flatten(depunctuated))
-    tkns = map(t -> tokenforstring(t), tknstrings)
+    map(t -> tokenforstring(t), tknstrings)
 end
+
+
+
 
 
 """
@@ -70,7 +69,7 @@ function splitPunctuation(s::AbstractString)
 end
 
 function numeric()
-     "′ϛϙϡΜ𐅵𐅷𐅸"
+     "$(NUMERIC_TICK)ϛϙϡΜ𐅵𐅷𐅸"
 end
 
 
@@ -113,15 +112,23 @@ $(SIGNATURES)
 """
 function tokenforstring(s::AbstractString)
     normed = Unicode.normalize(s, :NFKC)
-    @info("tokenize $(normed)")
-    if isAlphabetic(normed)
-        OrthographicToken(normed, LexicalToken())
-    elseif isPunctuation(normed)
+    @debug("tokenize $(normed)")
+
+    if isastro(s)
+        OrthographicToken(normed, AstronomicalSymbol()) 
+    elseif islabel(s)
+       OrthographicToken(normed, FigureLabelToken()) 
+    elseif isnum(s)
+        OrthographicToken(normed, MilesianIntegerToken()) 
+    elseif isPunctuation(s)
         OrthographicToken(normed, PunctuationToken())
+    elseif isAlphabetic(normed)
+        OrthographicToken(normed, LexicalToken())
     else
         OrthographicToken(normed, Orthography.UnanalyzedToken())
     end
 end
+
 
 
 

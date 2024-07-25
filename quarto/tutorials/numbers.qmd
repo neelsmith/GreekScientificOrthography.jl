@@ -1,0 +1,28 @@
+# Numbers
+
+## Integers in the "Milesian" system of notation
+
+- ones, tens, hundreds: alphabetic characters followed by the Greek numeric marker 'ʹ' (Unicode `x0374`).
+- comma separates thousands
+- myriad (10,000) is upper-case mu, Μ
+ 
+
+
+Summary of the Milesian system:
+
+
+::: {.column width="40%"}
+
+| Ones | Tens | Hundreds |
+| --- | --- | --- | 
+| α | ι  | ρ |
+| β | κ | σ |
+| γ | λ | τ |
+| δ | μ | υ |
+| ε| ν | φ |
+| ϛ | ξ | χ |
+| ζ| ο | ψ |
+| η| π | ω |
+| θ  | ϙ | ϡ |
+
+:::

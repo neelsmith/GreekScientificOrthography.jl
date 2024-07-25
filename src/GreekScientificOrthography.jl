@@ -37,6 +37,9 @@ export augment, augment_initial, augment_medial
 
 export stemortho
 
+const NUMERIC_TICK = 'ʹ' # unicode x0374
+export NUMERIC_TICK
+
 include("types.jl")
 include("tokens.jl")
 include("ortho.jl")
