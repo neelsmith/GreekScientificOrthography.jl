@@ -28,6 +28,7 @@ using Documenter, DocStringExtensions
 export GreekSciOrthography, stemortho
 
 export FigureLabelToken
+export AstronomicalSymbol
 export GreekNumericToken, MilesianIntegerToken, MilesianFractionToken
 
 export codepoints, tokentypes, tokenize

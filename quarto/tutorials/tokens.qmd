@@ -1,4 +1,8 @@
-# Tokens
+# Validating and tokenizing text
+
+
+Use the `stemortho` function to get an orthographic system  for working with Greek scientific texts:
+
 
 ```{julia}
 #| warning: false
@@ -8,6 +12,7 @@ o = stemortho()
 typeof(o)
 ```
 
+A `GreekSciOrthography` can recognize several specialized types of token:
 
 ```{julia}
 tokentypes(o)

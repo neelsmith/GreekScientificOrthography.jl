@@ -1,7 +1,7 @@
 "An orthographic system for texts in the pre-Euclidean Attic alphabet."
 struct GreekSciOrthography <: PolytonicGreek.GreekOrthography
-    codepoints
-    tokencategories
+    codepoints::AbstractString
+    tokencategories::Vector{DataType}
 end
 
 
@@ -23,8 +23,7 @@ end
 $(SIGNATURES)    
 """
 function tokentypes(ortho::GreekSciOrthography)
-    ortho.tokencategories
-
+    ortho.tokencategories 
 end
 
 
@@ -34,13 +33,14 @@ Instantiate a GreekSciOrthography with correct code points and token types.
 $(SIGNATURES)
 """
 function stemortho()
-    cps = alphabetic() * " \t\n" * punctuation() * numeric() * astro() |> unique
+    cps = alphabetic() * " \t\n" * punctuation() * numeric() * astro() |> unique |> join
     ttypes = [
         Orthography.LexicalToken,
         Orthography.PunctuationToken,
         Orthography.UnanalyzedToken,
         FigureLabelToken,
-        MilesianIntegerToken
+        MilesianIntegerToken,
+        AstronomicalSymbol
     ]
     GreekSciOrthography(cps, ttypes)
 end
@@ -113,6 +113,7 @@ $(SIGNATURES)
 """
 function tokenforstring(s::AbstractString)
     normed = Unicode.normalize(s, :NFKC)
+    @info("tokenize $(normed)")
     if isAlphabetic(normed)
         OrthographicToken(normed, LexicalToken())
     elseif isPunctuation(normed)
