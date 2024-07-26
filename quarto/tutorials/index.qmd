@@ -2,13 +2,6 @@
 title: Tutorials
 ---
 
-Start using `GreekScientificOrthography.jl`.
-
-
-- [validating and tokenizing strings](./tokens.qmd)
-- [formatting numeric tokens](./numbers.qmd)
-
-
 
 ## Quick start
 
@@ -28,3 +21,11 @@ validstring(archimedes, ortho)
 ```{julia}
 tkns = tokenize(archimedes, ortho)
 ```
+
+
+## Hands-on tutorials
+
+
+- [validating and tokenizing strings](./tokens.qmd)
+- [formatting numeric tokens](./numbers.qmd)
+

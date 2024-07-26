@@ -1,4 +1,5 @@
 module GreekScientificOrthography
+using Documenter, DocStringExtensions
 
 using Unicode 
 
@@ -9,21 +10,6 @@ import Orthography: codepoints
 import Orthography: tokenize
 
 using PolytonicGreek
-import PolytonicGreek: syllabify
-import PolytonicGreek: accentword
-import PolytonicGreek: accentultima
-import PolytonicGreek: accentpenult
-import PolytonicGreek: accentantepenult
-import PolytonicGreek: sortWords
-import PolytonicGreek: vowels
-import PolytonicGreek: consonants
-import PolytonicGreek: rmaccents
-import PolytonicGreek: countaccents
-import PolytonicGreek: augment
-import PolytonicGreek: augment_initial
-import PolytonicGreek: augment_medial
-
-using Documenter, DocStringExtensions
 
 export GreekSciOrthography, stemortho
 
@@ -33,12 +19,10 @@ export GreekNumericToken, MilesianIntegerToken, MilesianFractionToken
 
 export codepoints, tokentypes, tokenize
 
-export augment, augment_initial, augment_medial
-
-export stemortho
-
 const NUMERIC_TICK = 'ʹ' # unicode x0374
 export NUMERIC_TICK
+
+
 
 include("types.jl")
 include("tokens.jl")

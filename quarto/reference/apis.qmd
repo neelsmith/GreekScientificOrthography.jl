@@ -1,6 +1,7 @@
 # API documentation
 
 
+Create a `GreekScientificOrthography`:
 
 `stemortho` 
 
@@ -8,7 +9,42 @@
 ```{julia}
 #| echo: false
 #| warning: false
-using GreekScientificOrthography
+using GreekScientificOrthography, PolytonicGreek
 @doc stemortho
+```
+:::
+
+
+
+## `Orthography` interface
+
+`codepoints` 
+
+:::{.callout-note appearance="minimal"}
+```{julia}
+#| echo: false
+#| warning: false
+@doc codepoints
+```
+:::
+
+
+`tokentypes`
+
+:::{.callout-note appearance="minimal"}
+```{julia}
+#| echo: false
+#| warning: false
+@doc tokentypes
+```
+:::
+
+`tokenize`
+
+:::{.callout-note appearance="minimal"}
+```{julia}
+#| echo: false
+#| warning: false
+@doc tokenize
 ```
 :::

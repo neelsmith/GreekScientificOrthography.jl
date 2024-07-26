@@ -37,6 +37,7 @@ website:
       contents: 
         - tutorials/index.qmd
         - tutorials/tokens.qmd
+        - tutorials/numbers.qmd
 
     - title: "Guides"
       contents:
