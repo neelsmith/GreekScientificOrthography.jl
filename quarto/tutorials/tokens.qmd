@@ -7,10 +7,31 @@ Use the `stemortho` function to get an orthographic system  for working with Gre
 ```{julia}
 #| warning: false
 using GreekScientificOrthography
-
 o = stemortho()
 typeof(o)
 ```
+
+
+## Validate strings
+
+Text including astronomical symbols is valid:
+
+```{julia}
+using Orthography
+validstring("ὁ 🜚︎", o)
+```
+
+
+The following phrase from Archimedes, *On the Measurement of the Circle*, proposition 3, includes numeric quantities and figure labels in the text. Those are also valid.
+
+
+```{julia}
+archimedes = "ἡ ΓΕ πρὸς ΓΗ μείζονα λόγον ἔχει ἤπερ φοαʹ πρὸς ρνγʹ."
+validstring(archimedes, o)
+```
+
+
+## Tokenize strings
 
 A `GreekSciOrthography` can recognize several specialized types of token:
 
@@ -18,10 +39,14 @@ A `GreekSciOrthography` can recognize several specialized types of token:
 tokentypes(o)
 ```
 
+
 ```{julia}
-tokenize("", o)
+tokenize("ὁ 🜚︎", o)
+```
+
+```{julia}
+tokenize(archimedes, o)
 ```
 
 
 
-archim = "ἡ ΓΕ πρὸς ΓΗ μείζονα λόγον ἔχει ἤπερ φοαʹ πρὸς ρνγʹ."

@@ -10,7 +10,7 @@ using GreekScientificOrthography
 ```
 
 
-The center point of this package is the `GreekSciOrthography`, a concrete subtype of the abstract  `GreekOrthography` type (from the [`PolytonicGreek`](https://neelsmith.quarto.pub/polytonicgreek/) package).
+The centerpiece of this package is the `GreekSciOrthography`, a concrete subtype of the abstract `GreekOrthography` type (from the [`PolytonicGreek`](https://neelsmith.quarto.pub/polytonicgreek/) package).
 
 
 ## Characters
@@ -44,24 +44,16 @@ o = stemortho()
 tokentypes(o)
 ```
 
-```
+Astronomical symbols are represented by single Unicode codepoints such as `🜚︎`, "sol".
 
 
-In version `0.1.0`, integer values in "Milesian notation" up to 9,999 are tokenized as `MilesianIntegerToken`s, and astronomical symbols are tokenized as `AstronomicalSymbol`s.
+In contrast to the other token types, the syntax of numeric values and mathematical figure labels is case-sensitive.
+
+Integer values in the Milesian notational system are written using 27 alphabetic or archaic alphabetic characters, followed by the numeric marker 'ʹ' (Unicode x0374).  (See a [tutorial on writing numbers](../tutorials/numbers.qmd).)  A comma separates digits for ones, tens and hundreds (to the right of the comma) from digits for thousands (left of the commma). `Μʹ` is the value for "myriad," 10,000. `μ` is the digit for 40.
+
+Mathematical figure labels are defined as strings of upper-case purely alphabetic characters, without any breathing or accents.  The string `Ἡ` is a lexical token (the nominative feminine singular of the article, in upper case), while `Η` is a figure label, "eta". 
 
 
+## Work in progress
 
-::: {.callout-note title="In progress"}
-Support for tokenizing fractions and larger integer values  is planned for the next release.
-:::
-
-
-- semi-case-sensitive
-- recognizes scientific symbols: astronomical glyphs, numeric markers
-
-
-## Types
-
-- figure labels: tokenization treats all-uppercase tokens < some length as label types for figures
-- milesian integers:
-- milesian fractions
+Support for tokenizing fractions and integer values greater than  9,999 is planned for the next release.

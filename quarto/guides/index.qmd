@@ -6,5 +6,10 @@ Recipe book for more complex tasks using `GreekScientificOrthography.jl` can be 
 
 
 ::: {.callout-note title="TBA"}
-Add a guide here to the complicated interactions that can happen with Unicode equivalence using modifying and non-modifying characters for prime, double prime, and Greek numeric marker.
+Add guides here for
+
+
+1. the complicated interactions that can happen with Unicode equivalence using modifying and non-modifying characters for prime, double prime, and Greek numeric marker
+2. implementing Archimedes' system of writing arbitrarily large numbers
+
 :::
