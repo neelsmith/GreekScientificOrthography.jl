@@ -1,6 +1,14 @@
-# Numbers
+# Formatting numeric tokens
+
+
+Manuscripts of Greek scientific and mathematical texts use the "Milesian" system of numeric notation.
+
+In version `0.1.0` of `GreekScientificOrthography`, integer values from 1 to 9,999 in this notation are correctly tokenized.
 
 ## Integers in the "Milesian" system of notation
+
+The Milesian system is essentially a place-value system.  The 27 values for ones (1-9), tens (10-90), and hundreds (100-900) are noted with specific alphabetic characters in normal alphabetic order, with the additions of `ϛ` for 6, `ϙ` for 90 and `ϡ` for 900.
+
 
 - ones, tens, hundreds: alphabetic characters followed by the Greek numeric marker 'ʹ' (Unicode `x0374`).
 - comma separates thousands
@@ -26,3 +34,9 @@ Summary of the Milesian system:
 | θ  | ϙ | ϡ |
 
 :::
+
+## Integers greater than 9,999
+
+## Fractional values
+
+## Using integer values in hexadecimal units

@@ -12,7 +12,7 @@ format:
 
 
 website:
-  title: "GreekScientificOrthography"
+  title: "greekscientificorthography"
   navbar:
     background: primary
     search: true
@@ -29,7 +29,7 @@ website:
         file: reference/index.qmd  
     right:   
       - icon: github
-        href: https://github.com/neelsmith/GreekSciOrthography.jl
+        href: https://github.com/neelsmith/GreekScientificOrthography.jl
         aria-label: GitHub
 
   sidebar:

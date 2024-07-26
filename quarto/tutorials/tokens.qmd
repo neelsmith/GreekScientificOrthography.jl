@@ -17,3 +17,11 @@ A `GreekSciOrthography` can recognize several specialized types of token:
 ```{julia}
 tokentypes(o)
 ```
+
+```{julia}
+tokenize("", o)
+```
+
+
+
+archim = "ἡ ΓΕ πρὸς ΓΗ μείζονα λόγον ἔχει ἤπερ φοαʹ πρὸς ρνγʹ."

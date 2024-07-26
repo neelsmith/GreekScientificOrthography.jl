@@ -1,22 +1,59 @@
 ---
-title: Concepts
+title: The orthography of Greek math and science
 ---
 
-The center point of this package is the `GreekSciOrthography`, a concrete subtype of the abstract  `GreekOrthography` (from the [`PolytonicGreek`](https://neelsmith.quarto.pub/polytonicgreek/) package).
+```{julia}
+#| warning: false
+#| echo: false
+#| output: false
+using GreekScientificOrthography
+```
 
 
-`GreekSciOrthography` adds to the alphabetic character set of the `LiteraryGreekOrthography` type  characters used to write numeric values in Greek mathematical and scientific texts, and astronomical symbols for planets and zodiac signs that commonly appear in astronomical texts. 
+The center point of this package is the `GreekSciOrthography`, a concrete subtype of the abstract  `GreekOrthography` type (from the [`PolytonicGreek`](https://neelsmith.quarto.pub/polytonicgreek/) package).
+
+
+## Characters
+
+To the familiar alphabetic character set of the `LiteraryGreekOrthography` type, `GreekSciOrthography` adds:
+
+- astronomical symbols for planets and zodiac signs that commonly appear in astronomical texts
+
+```{julia}
+GreekScientificOrthography.astro()
+```
+
+
+- the non-alphabetic characters used to write numeric values in Greek mathematical and scientific texts
 
 
 
+```{julia}
+GreekScientificOrthography.numeric()
+```
 
-In version `0.1`, integer values in "Milesian notation" up to 9,999 are tokenized as `MilesianIntegerToken`s, and astronomical symbols are tokenized as `AstronomicalSymbol`s.
+
+## Token types
+
+In addition to recognizing lexical and punctuation tokens, a `GreekSciOrthography` can tokenize text into astronomical symbols, numeric tokens in the Milesian notational system, and labels for figures in mathematical texts.
+
+
+
+```{julia}
+o = stemortho()
+tokentypes(o)
+```
+
+```
+
+
+In version `0.1.0`, integer values in "Milesian notation" up to 9,999 are tokenized as `MilesianIntegerToken`s, and astronomical symbols are tokenized as `AstronomicalSymbol`s.
+
+
 
 ::: {.callout-note title="In progress"}
 Support for tokenizing fractions and larger integer values  is planned for the next release.
 :::
-
-
 
 
 - semi-case-sensitive
