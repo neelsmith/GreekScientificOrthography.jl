@@ -39,6 +39,7 @@ Note that in `GreekScientificOrthography`, characters used to write the basic in
 Since most of the characters used to write integers in the Milesian system can also be alphabetic characters, integer tokens are flagged with a special marker, the numeric tick mark, `ʹ` (Unicode x0374). The integer value `1` is written like this:
 
 ```{julia}
+#| output: false
 one = "αʹ" 
 ```
 
@@ -48,6 +49,7 @@ The sequence of digits is always smallest to largest from right to left. Note th
 
 
 ```{julia}
+#| output: false
 eleven = "ιαʹ"
 one_hundred_one = "ραʹ"
 one_hundred_eleven = "ριαʹ"
@@ -95,7 +97,12 @@ tenthousand_one = "Μʹ αʹ"
 tokenize(tenthousand_one, ortho)
 ```
 
-This is capable of expressing whole numbers up to 19,999.
+::: {.callout-note}
+Greek manuscripts do not normally repeat the tick mark on the myriad marker; `GreekScientificOrthography` requires this to guarantee context-independent parsing of tokens.
+:::
+
+
+You can express whole numbers up to 19,999 in this way.
 
 ```{julia}
 nineteen_999 = "Μʹ θ,ϡϙθʹ"
@@ -109,16 +116,70 @@ tokenize(nineteen_999, ortho)
 
 ## Integers greater than 19,999
 
+To write values larger than 19,999, Milesian notation begins by multiplying the myriad character. In manuscripts, the multiplier is normally written above the `Μ`; in `GreekScientificOrthography`, we use the markdown convention for superscript that is supported by pandoc, among others, of bracketing the superscript value with carets. In this context, neither numeric character requires the numeric tick.
+
+20,000, for example, is written as Μ multiplied by β, like this example:
+
+```{julia}
+twentyk = "Μ^β^"
+validstring(twentyk, ortho)
+```
+
+When you display the value in an environment that supports pandoc's markdown extension, the multiplier will display as a superscript.
+
+```{julia}
+using Markdown
+Markdown.parse(twentyk)
+```
+
+
+Archimedes uses this notation as he derives limiting values for *pi* in  his treatise  *Measurement of a Circle*. The value 349,450, for example, is written with these two tokens:
+
+```{julia}
+threefortynine450 = "Μ^λδ^ ,θυνʹ"
+Markdown.parse(threefortynine450)
+```
+
+```{julia}
+tokenize(threefortynine450, ortho)
+```
 
 
 
 ## Fractional values
 
+`GreekScientificOrthography` includes characters for three fractional values that are often written in manuscripts with special symbols: `𐅵` for one half, `𐅷` for two-thirds, and `𐅸` for three quarters.
 
+Apart from these special cases, the only notation for fractional values available to Greek mathematicians was to use normal integer notation, but flagged with a special double-prime marker indicating that this is a *reciprocal* value.  
+
+```{julia}
+sixth = "ϛ″"
+thirtysixth = "λϛ″"
+validstring(sixth, ortho) == validstring(thirtysixth, ortho)
+```
+
+Other fractional values would be written as sums of these.  The fraction 2/3 can, for example, appear as 1/2 + 1/6, written simply as a succession of individual fractional tokens. As with integer values, the sequence is least to greatest from right to left.
+
+```{julia}
+twothirds = "β″ ϛ″"
+tokenize(twothirds, ortho)
+```
+
+Fractions can of course be mixed with integer numbers.
+
+```{julia}
+six_and_twothirds = "ϛʹ β″ ϛ″"
+```
 
 ## Using integer values in hexadecimal units
 
 
+::: {.callout-note title="TBA"}
 
-- values 0-59.  Adds special character `Ο` (οὐδέν, "nothing") for 0.
-- tokenize
+An alternative to tedious sums of fractions:
+
+- divide whole units into sixtieths, seconds (3600ths), thirds (216000ths)... each written with an integer value up to 59
+- typically used in tables where columns determine meaning of integer
+- but manually written columns make null values dangerous if they're left blank, so adds special character `Ο` (οὐδέν, "nothing") for 0.
+
+:::

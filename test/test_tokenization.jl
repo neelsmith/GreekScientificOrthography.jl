@@ -68,4 +68,11 @@ end
     @test length(fraction_tkns) == 1
     @test tokencategory(fraction_tkns[1]) isa MilesianFractionToken
 
+
+    ouden = "Οʹ"
+    @test validstring(ouden, ortho)
+    ouden_tkns = tokenize(ouden, ortho)
+    @test length(ouden_tkns) == 1
+    @test tokencategory(ouden_tkns[1]) isa MilesianIntegerToken
+
 end

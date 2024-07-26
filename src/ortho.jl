@@ -69,7 +69,7 @@ function splitPunctuation(s::AbstractString)
 end
 
 function numeric()
-     "$(NUMERIC_TICK)$(FRACTION_TICK)ϛϙϡΜ𐅵𐅷𐅸^"
+     "$(NUMERIC_TICK)$(FRACTION_TICK)ϛϙϡΜ𐅵𐅷𐅸^Ο"
 end
 
 
