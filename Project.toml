@@ -1,7 +1,7 @@
 name = "GreekScientificOrthography"
 uuid = "049fe880-56b1-44e6-a5bf-3b4decaa7e2d"
 authors = ["Neel Smith <dnsmith.neel@gmail.com>"]
-version = "0.1.0"
+version = "0.2.0"
 
 [deps]
 DocStringExtensions = "ffbed154-4ef7-542d-bbb7-c09d3a79fcae"

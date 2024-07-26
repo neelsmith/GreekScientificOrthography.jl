@@ -69,7 +69,7 @@ function splitPunctuation(s::AbstractString)
 end
 
 function numeric()
-     "$(NUMERIC_TICK)ϛϙϡΜ𐅵𐅷𐅸"
+     "$(NUMERIC_TICK)$(FRACTION_TICK)ϛϙϡΜ𐅵𐅷𐅸^"
 end
 
 
@@ -118,8 +118,10 @@ function tokenforstring(s::AbstractString)
         OrthographicToken(normed, AstronomicalSymbol()) 
     elseif islabel(s)
        OrthographicToken(normed, FigureLabelToken()) 
-    elseif isnum(s)
+    elseif isinteger(s)
         OrthographicToken(normed, MilesianIntegerToken()) 
+    elseif isfraction(s)
+        OrthographicToken(normed, MilesianFractionToken()) 
     elseif isPunctuation(s)
         OrthographicToken(normed, PunctuationToken())
     elseif isAlphabetic(normed)

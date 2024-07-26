@@ -22,6 +22,9 @@ export codepoints, tokentypes, tokenize
 const NUMERIC_TICK = 'ʹ' # unicode x0374
 export NUMERIC_TICK
 
+const FRACTION_TICK = '″' # unicode x2033, "double prime"
+export FRACTION_TICK
+
 
 
 include("types.jl")
