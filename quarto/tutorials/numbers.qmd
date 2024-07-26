@@ -1,22 +1,22 @@
 # Formatting numeric tokens
-
+```{julia}
+#| warning: false
+#| echo: false
+#| output: false
+using GreekScientificOrthography, Orthography
+```
 
 Manuscripts of Greek scientific and mathematical texts use the "Milesian" system of numeric notation.
 
-In version `0.1.0` of `GreekScientificOrthography`, integer values from 1 to 9,999 in this notation are correctly tokenized.
-
 ## Integers in the "Milesian" system of notation
 
-The Milesian system is essentially a place-value system.  The 27 values for ones (1-9), tens (10-90), and hundreds (100-900) are noted with specific alphabetic characters in normal alphabetic order, with the additions of `ϛ` for 6, `ϙ` for 90 and `ϡ` for 900.
+### Values from 1-999
 
+The Milesian system is essentially a place-value system.  The 27 values for ones (1-9), tens (10-90), and hundreds (100-900) are noted with specific alphabetic characters in normal alphabetic order, with the additions of `ϛ` for 6, `ϙ` for 90 and `ϡ` for 900. 
 
-- ones, tens, hundreds: alphabetic characters followed by the Greek numeric marker 'ʹ' (Unicode `x0374`).
-- comma separates thousands
-- myriad (10,000) is upper-case mu, Μ
- 
-
-
-Summary of the Milesian system:
+::: {.callout-note}
+Note that in `GreekScientificOrthography`, characters used to write the basic integer values *must be in lower-case*.
+:::
 
 
 ::: {.column width="40%"}
@@ -35,8 +35,90 @@ Summary of the Milesian system:
 
 :::
 
-## Integers greater than 9,999
+
+Since most of the characters used to write integers in the Milesian system can also be alphabetic characters, integer tokens are flagged with a special marker, the numeric tick mark, `ʹ` (Unicode x0374). The integer value `1` is written like this:
+
+```{julia}
+one = "αʹ" 
+```
+
+
+The sequence of digits is always smallest to largest from right to left. Note that their is no need for a zero character to represent the absence of a value is hundreds, tens or ones column, since the characters are distinct.
+
+
+
+```{julia}
+eleven = "ιαʹ"
+one_hundred_one = "ραʹ"
+one_hundred_eleven = "ριαʹ"
+```
+
+All of these are valid strings in a `GreekSciOrthography`.
+
+```{julia}
+ortho = stemortho()
+validstring(one, ortho) == validstring(eleven, ortho) == validstring(one_hundred_one, ortho) == validstring(one_hundred_eleven, ortho)
+```
+
+
+A comma separates thousands values from 1,000 - 9,000 (left of the comma) from hundreds, tens and ones. The thousands values reuse the same characters as the ones values.
+
+```{julia}
+one_thousand_one = "α,αʹ"
+validstring(one_thousand_one, ortho)
+```
+
+All of these strings represent a single integer token (type `MilesianIntegerToken`).
+
+```{julia}
+tokenize(one, ortho)
+```
+
+
+```{julia}
+tokenize(one_thousand_one, ortho)
+```
+
+## Integers from 999-19,999
+
+The value for 10,000 is written with the upper-case mu, `Μ` (for μυριάς, "myriad").
+
+```{julia}
+myriad = "Μʹ"
+validstring(myriad, ortho)
+```
+
+Conventionally, the myriads value is written as a separate token separated by white space from the smaller columns. That means that a value like 10,001 will be parsed as two tokens. 
+
+```{julia}
+tenthousand_one = "Μʹ αʹ"
+tokenize(tenthousand_one, ortho)
+```
+
+This is capable of expressing whole numbers up to 19,999.
+
+```{julia}
+nineteen_999 = "Μʹ θ,ϡϙθʹ"
+validstring(nineteen_999, ortho)
+```
+
+```{julia}
+tokenize(nineteen_999, ortho)
+```
+
+
+## Integers greater than 19,999
+
+
+
 
 ## Fractional values
 
+
+
 ## Using integer values in hexadecimal units
+
+
+
+- values 0-59.  Adds special character `Ο` (οὐδέν, "nothing") for 0.
+- tokenize
