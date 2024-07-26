@@ -2,8 +2,23 @@
 title: Concepts
 ---
 
+The center point of this package is the `GreekSciOrthography`, a concrete subtype of the abstract  `GreekOrthography` (from the [`PolytonicGreek`](https://neelsmith.quarto.pub/polytonicgreek/) package).
 
-- a subtype of `GreekOrthography`
+
+`GreekSciOrthography` adds to the alphabetic character set of the `LiteraryGreekOrthography` type  characters used to write numeric values in Greek mathematical and scientific texts, and astronomical symbols for planets and zodiac signs that commonly appear in astronomical texts. 
+
+
+
+
+In version `0.1`, integer values in "Milesian notation" up to 9,999 are tokenized as `MilesianIntegerToken`s, and astronomical symbols are tokenized as `AstronomicalSymbol`s.
+
+::: {.callout-note title="In progress"}
+Support for tokenizing fractions and larger integer values  is planned for the next release.
+:::
+
+
+
+
 - semi-case-sensitive
 - recognizes scientific symbols: astronomical glyphs, numeric markers
 

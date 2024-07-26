@@ -28,3 +28,44 @@ end
     @test tokencategory(tkns[12]) isa PunctuationToken
     @test tokencategory(tkns[11]) isa MilesianIntegerToken
 end
+
+
+
+@testset "Test difficult numeric tokens"  begin
+
+    #=
+    This is the a good stress test:
+
+    From Archimedes, *Dim.Circ* prop. 3:
+
+    Ὡς ἄρα συναμφότερος ἡ ΖΕ, ΕΓ πρὸς ΖΓ, ἡ ΕΓ πρὸς ΓΗ: ὥστε ἡ ΓΕ πρὸς ΓΗ μείζονα λόγον ἔχει ἤπερ φοαʹ πρὸς ρνγʹ. Ἡ ΕΗ ἄρα πρὸς ΗΓ δυνάμει λόγον ἔχει, ὃν Μ^λδ^ ,θυνʹ πρὸς Μ^β^ ,γυθʹ:  μήκει ἄρα, ὃν φϙαʹ  η″ πρὸς ρνγʹ.
+
+    =#
+
+    ortho = stemortho()
+    thousands = ",γυθʹ" # = 3,409
+    @test validstring(thousands, ortho) 
+    thousands_tkns = tokenize(thousands, ortho)
+    @test length(thousands_tkns) == 1
+    @test tokencategory(thousands_tkns[1]) isa MilesianIntegerToken
+
+    hundreds = "φϙαʹ" # == 591
+    @test validstring(hundreds, ortho) 
+    hundreds_tkns = tokenize(hundreds, ortho)
+    @test length(hundreds_tkns) == 1
+    @test tokencategory(hundreds_tkns[1]) isa MilesianIntegerToken
+
+    myriads = "Μ^β^"
+    @test_broken validstring(myriads, ortho) # == 20,000
+    myriads_tkns = tokenize(myriads, ortho)
+    @test length(myriads_tkns) == 1
+    @test_broken tokencategory(myriads_tkns[1]) isa MilesianIntegerToken
+
+
+    fraction = "η″"
+    @test_broken validstring(fraction, ortho) # == 1/8
+    fraction_tkns = tokenize(fraction, ortho)
+    @test length(fraction_tkns) == 1
+    @test_broken tokencategory(fraction_tkns[1]) isa MilesianFractionToken
+
+end

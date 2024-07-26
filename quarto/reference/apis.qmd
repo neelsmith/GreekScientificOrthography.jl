@@ -1,0 +1,14 @@
+# API documentation
+
+
+
+`stemortho` 
+
+:::{.callout-note appearance="minimal"}
+```{julia}
+#| echo: false
+#| warning: false
+using GreekScientificOrthography
+@doc stemortho
+```
+:::
