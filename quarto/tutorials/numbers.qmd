@@ -19,7 +19,7 @@ Note that in `GreekScientificOrthography`, characters used to write the basic in
 :::
 
 
-::: {.column width="40%"}
+::: {.column width="50%"}
 
 | Ones | Tens | Hundreds |
 | --- | --- | --- | 
