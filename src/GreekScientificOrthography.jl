@@ -37,6 +37,10 @@ export TWO_THIRDS
 const THREE_FOURTHS = '𐅸' # unicode x10178
 export THREE_FOURTHS
 
+const EVIL_PRIME = Char(0x2b9) # "modifier letter prime"
+const EVIL_DOUBLE_PRIME = Char(0x2ba) #  "modifier letter double prime"
+
+
 export milesian
 
 include("types.jl")
