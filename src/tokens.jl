@@ -29,13 +29,15 @@ end
 $(SIGNATURES)
 """
 function isinteger(s)
+    
+    @info("Look at $(s). Ends with tick? $(s[end])")
     if s == "Μ"  # upper case Mu, unicode x039c
         true
 
     elseif s[1] == 'Μ' && s[end] == '^'
         true
 
-    elseif s[end] == NUMERIC_TICK  # unicode x0374
+    elseif s[end] == NUMERIC_TICK  || s[end] == EVIL_PRIME # unicode x0374
         true
 
     else

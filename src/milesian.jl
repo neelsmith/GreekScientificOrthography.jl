@@ -14,6 +14,7 @@ function milesian(tkn::OrthographicToken)
         fractionvalue(tkn)
 
     elseif tokencategory(tkn) isa MilesianIntegerToken
+        @info("Its an int: $(tkn)")
         intvalue(tkn)
     else
         throw(DomainError("Not a Milesian token: $(tkn)."))
@@ -28,6 +29,11 @@ function intvalue(tkn::OrthographicToken)
     intvalue(tokentext(tkn)) #|> sum
 end
 
+
+
+"""Compute numeric value of a token expressing numbers of myriads.
+$(SIGNATURES)
+"""
 function myriadvalue(s::AbstractString)
     myriad = 10000
     parts = split(s, "^")
@@ -39,11 +45,16 @@ function myriadvalue(s::AbstractString)
     end
 end
 
-function intdigits(s)
+
+"""Compute numeric value of a string expressing an integer value below 1,000.
+$(SIGNATURES)
+"""
+function intdigits(s::AbstractString)
     pieces = []
     for c in s
         if istick(c)
             # ignore
+        
         else
             if ! (c in keys(digitvalues))
                 throw(DomainError("Invalid digit: $(c) $(codepoint(c))"))
@@ -78,8 +89,10 @@ function intvalue(s::AbstractString)
             intdigits(pieces[1])
             
         else
+            @info("Here are the pieces: $(pieces)")
             thousands = intdigits(pieces[1]) * 1000
-            isempty(pieces[2]) ? thousands : thousands + intdigits(pieces[2])
+            lowervals = filter(s -> ! istick(s), pieces[2])
+            isempty(lowervals) ? thousands : thousands + intdigits(lowervals)
             
         end
 
@@ -97,8 +110,6 @@ function intpieces(tkn::OrthographicToken)
     intpieces(tokentext(tkn))
 end
 
-function intpieces(s::AbstractString)
-end
 
 """True if `c` is one of the "tick" characters that
 Unicode equivalence can botch.
@@ -108,11 +119,13 @@ function istick(c::Char)
     c in [NUMERIC_TICK, FRACTION_TICK, PRIME, EVIL_PRIME, EVIL_DOUBLE_PRIME]
 end
 
+
+
 function fractionvalue(tkn::OrthographicToken)
     fractionpieces(tkn) |> sum
 end
 
-"""Compute numeric value of a orthographic token in Milesian notation.
+"""Compute numeric value of an orthographic token expressing a fractional value in Milesian notation.
 $(SIGNATURES)
 """
 function fractionpieces(tkn::OrthographicToken)
@@ -146,11 +159,3 @@ function fractionpieces(s::AbstractString)
     end
     pieces
 end
-
-#=
-if s == "Μʹ"
-    10000
-elseif if s ==  "Οʹ"
-    0
-else
-=#
