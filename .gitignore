@@ -3,3 +3,4 @@ _freeze/
 Manifest.toml
 settings.json
 .DS_Store
+docs/build/
