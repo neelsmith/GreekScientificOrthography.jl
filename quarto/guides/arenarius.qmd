@@ -1,0 +1,15 @@
+# Large values
+
+
+## Using integer values in hexadecimal units
+
+
+::: {.callout-note title="TBA"}
+
+An alternative to tedious sums of fractions:
+
+- divide whole units into sixtieths, seconds (3600ths), thirds (216000ths)... each written with an integer value up to 59
+- typically used in tables where columns determine meaning of integer
+- but manually written columns make null values dangerous if they're left blank, so adds special character `Ο` (οὐδέν, "nothing") for 0.
+
+:::

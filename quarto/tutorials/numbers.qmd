@@ -1,185 +1,105 @@
-# Formatting numeric tokens
+# Evaluating numeric values
+
+`GreekScientificOrthography` includes the `milesian` function for parsing Greek numbers in Milesian notation into numeric values.
+
+::: {.callout-tip title="Milesian notation"}
+See [this guide](../guides/numbers.qmd) for full documentation of the Milesian notation
+recogized by `GreekScientificOrthography`.
+:::
+
+
+## Integers
+
+Integer values are identified with the numeric tick, `ʹ`.
 ```{julia}
 #| warning: false
-#| echo: false
-#| output: false
-using GreekScientificOrthography, Orthography
-```
-
-Manuscripts of Greek scientific and mathematical texts use the "Milesian" system of numeric notation.
-
-## Integers in the "Milesian" system of notation
-
-### Values from 1-999
-
-The Milesian system is essentially a place-value system.  The 27 values for ones (1-9), tens (10-90), and hundreds (100-900) are noted with specific alphabetic characters in normal alphabetic order, with the additions of `ϛ` for 6, `ϙ` for 90 and `ϡ` for 900. 
-
-::: {.callout-note}
-Note that in `GreekScientificOrthography`, characters used to write the basic integer values *must be in lower-case*.
-:::
-
-
-::: {.column width="50%"}
-
-| Ones | Tens | Hundreds |
-| --- | --- | --- | 
-| α | ι  | ρ |
-| β | κ | σ |
-| γ | λ | τ |
-| δ | μ | υ |
-| ε| ν | φ |
-| ϛ | ξ | χ |
-| ζ| ο | ψ |
-| η| π | ω |
-| θ  | ϙ | ϡ |
-
-:::
-
-
-Since most of the characters used to write integers in the Milesian system can also be alphabetic characters, integer tokens are flagged with a special marker, the numeric tick mark, `ʹ` (Unicode x0374). The integer value `1` is written like this:
-
-```{julia}
-#| output: false
-one = "αʹ" 
-```
-
-
-The sequence of digits is always smallest to largest from right to left. Note that their is no need for a zero character to represent the absence of a value is hundreds, tens or ones column, since the characters are distinct.
-
-
-
-```{julia}
-#| output: false
-eleven = "ιαʹ"
-one_hundred_one = "ραʹ"
-one_hundred_eleven = "ριαʹ"
-```
-
-All of these are valid strings in a `GreekSciOrthography`.
-
-```{julia}
-ortho = stemortho()
-validstring(one, ortho) == validstring(eleven, ortho) == validstring(one_hundred_one, ortho) == validstring(one_hundred_eleven, ortho)
-```
-
-
-A comma separates thousands values from 1,000 - 9,000 (left of the comma) from hundreds, tens and ones. The thousands values reuse the same characters as the ones values.
-
-```{julia}
-one_thousand_one = "α,αʹ"
-validstring(one_thousand_one, ortho)
-```
-
-All of these strings represent a single integer token (type `MilesianIntegerToken`).
-
-```{julia}
-tokenize(one, ortho)
-```
-
-
-```{julia}
-tokenize(one_thousand_one, ortho)
-```
-
-## Integers from 999-19,999
-
-The value for 10,000 is written with the upper-case mu, `Μ` (for μυριάς, "myriad").
-
-```{julia}
-myriad = "Μʹ"
-validstring(myriad, ortho)
-```
-
-Conventionally, the myriads value is written as a separate token separated by white space from the smaller columns. That means that a value like 10,001 will be parsed as two tokens. 
-
-```{julia}
-tenthousand_one = "Μʹ αʹ"
-tokenize(tenthousand_one, ortho)
-```
-
-::: {.callout-note}
-Greek manuscripts do not normally repeat the tick mark on the myriad marker; `GreekScientificOrthography` requires this to guarantee context-independent parsing of tokens.
-:::
-
-
-You can express whole numbers up to 19,999 in this way.
-
-```{julia}
-nineteen_999 = "Μʹ θ,ϡϙθʹ"
-validstring(nineteen_999, ortho)
+using GreekScientificOrthography
+milesian("δʹ")
 ```
 
 ```{julia}
-tokenize(nineteen_999, ortho)
+milesian("κδʹ")
+```
+
+Thousands are separated by a comma from lower-value digits.
+
+```{julia}
+milesian("α,αʹ")
 ```
 
 
-## Integers greater than 19,999
+## Fractions
 
-To write values larger than 19,999, Milesian notation begins by multiplying the myriad character. In manuscripts, the multiplier is normally written above the `Μ`; in `GreekScientificOrthography`, we use the markdown convention for superscript that is supported by pandoc, among others, of bracketing the superscript value with carets. In this context, neither numeric character requires the numeric tick.
+Fractional are written as unit fractions values given by the reciprocal value and tagged with a double-prime marker.
 
-20,000, for example, is written as Μ multiplied by β, like this example:
 
 ```{julia}
-twentyk = "Μ^β^"
-validstring(twentyk, ortho)
-```
-
-When you display the value in an environment that supports pandoc's markdown extension, the multiplier will display as a superscript.
-
-```{julia}
-using Markdown
-Markdown.parse(twentyk)
-```
-
-
-Archimedes uses this notation as he derives limiting values for *pi* in  his treatise  *Measurement of a Circle*. The value 349,450, for example, is written with these two tokens:
-
-```{julia}
-threefortynine450 = "Μ^λδ^ ,θυνʹ"
-Markdown.parse(threefortynine450)
+milesian("δ″")
 ```
 
 ```{julia}
-tokenize(threefortynine450, ortho)
+milesian("κδ″")
 ```
 
-
-
-## Fractional values
-
-`GreekScientificOrthography` includes characters for three fractional values that are often written in manuscripts with special symbols: `𐅵` for one half, `𐅷` for two-thirds, and `𐅸` for three quarters.
-
-Apart from these special cases, the only notation for fractional values available to Greek mathematicians was to use normal integer notation, but flagged with a special double-prime marker indicating that this is a *reciprocal* value.  
+Other values have to be expressed as the sum of a series of unit fractions. Two-thirds can be written as 1/2 + 1/6, for example.
 
 ```{julia}
-sixth = "ϛ″"
-thirtysixth = "λϛ″"
-validstring(sixth, ortho) == validstring(thirtysixth, ortho)
+milesian("β″ ϛ″")
 ```
 
-Other fractional values would be written as sums of these.  The fraction 2/3 can, for example, appear as 1/2 + 1/6, written simply as a succession of individual fractional tokens. As with integer values, the sequence is least to greatest from right to left.
+
+You can of course mix integers and fractions.
 
 ```{julia}
-twothirds = "β″ ϛ″"
-tokenize(twothirds, ortho)
+milesian("βʹ β″")
 ```
 
-Fractions can of course be mixed with integer numbers.
+`GreekScientificOrthography` includes three special characters often used in Greek manuscripts for the values 1/2, 2/3 and 3/4.
 
 ```{julia}
-six_and_twothirds = "ϛʹ β″ ϛ″"
+milesian("𐅵″")
 ```
 
-## Using integer values in hexadecimal units
+## Myriads
+
+The basic notation lets you write integers up to 9,999.
+
+```{julia}
+milesian("θ,ϡϙθʹ")
+```
+
+10,000 is written with upper-case mu, for "myriad".
 
 
-::: {.callout-note title="TBA"}
+```{julia}
+milesian("Μʹ")
+```
 
-An alternative to tedious sums of fractions:
+It's treated as a distinct token. As with fractions, the value of the string expression is the sum of the tokens.
 
-- divide whole units into sixtieths, seconds (3600ths), thirds (216000ths)... each written with an integer value up to 59
-- typically used in tables where columns determine meaning of integer
-- but manually written columns make null values dangerous if they're left blank, so adds special character `Ο` (οὐδέν, "nothing") for 0.
+```{julia}
+milesian("Μʹ α,αʹ")
+```
 
-:::
+Myriads can be multiplied! In  `GreekScientificOrthography` this is indicated with a Markdown superscript expression (enclosed in carets).
+
+```{julia}
+milesian("Μ^β^")
+```
+
+
+A myriad myriads is 10^8^!
+
+```{julia}
+milesian("Μ^Μ^")
+```
+
+The biggest integer value we can write in this system is 100009999.
+
+```{julia}
+milesian("Μ^Μ^ θ,ϡϙθʹ")
+```
+
+
+
+

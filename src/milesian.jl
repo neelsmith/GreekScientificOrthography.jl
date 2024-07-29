@@ -14,7 +14,7 @@ function milesian(tkn::OrthographicToken)
         fractionvalue(tkn)
 
     elseif tokencategory(tkn) isa MilesianIntegerToken
-        @info("Its an int: $(tkn)")
+        @debug("Its an int: $(tkn)")
         intvalue(tkn)
     else
         throw(DomainError("Not a Milesian token: $(tkn)."))
@@ -78,18 +78,17 @@ end
 $(SIGNATURES)
 """
 function intvalue(s::AbstractString)
-    @info("Int of $(s)")
+    @debug("Int of $(s)")
      if startswith(s, "Μ")
         myriadvalue(s)
      else
         pieces = split(s, ",")
         if length(pieces) == 1 
-            #intdigits(pieces[1])
-            @info("Get intdigits for $(pieces[1])")
+            @debug("Get intdigits for $(pieces[1])")
             intdigits(pieces[1])
             
         else
-            @info("Here are the pieces: $(pieces)")
+            @debug("Here are the pieces: $(pieces)")
             thousands = intdigits(pieces[1]) * 1000
             lowervals = filter(s -> ! istick(s), pieces[2])
             isempty(lowervals) ? thousands : thousands + intdigits(lowervals)
@@ -120,7 +119,9 @@ function istick(c::Char)
 end
 
 
-
+"""Compute numeric value of an orthographic token expressing a fractional value in Milesian notation.
+$(SIGNATURES)
+"""
 function fractionvalue(tkn::OrthographicToken)
     fractionpieces(tkn) |> sum
 end
@@ -133,29 +134,26 @@ function fractionpieces(tkn::OrthographicToken)
     fractionpieces(tokentext(tkn))
 end
 
+"""Compute numeric value of a string for a single token expressing a fractional value in Milesian notation.
+$(SIGNATURES)
+"""
 function fractionpieces(s::AbstractString)
-    @assert(istick(s[end]))
-
-    pieces = []
-    for gr in graphemes(s)
-        @debug("Eval grapheme $(gr)")
-        if gr == "$(ONE_HALF)"
-            grval = 1 /2
-            push!(pieces, grval)
-        elseif gr == "$(TWO_THIRDS)"
-            grval = 2 / 3
-            push!(pieces, grval)
-        elseif gr == "$(THREE_FOURTHS)"
-            grval =  3 / 4
-            push!(pieces, grval)
-
-        elseif istick(gr[1])
-        else
-            @debug("Eval char $(gr[1])")
-            @assert gr[1] in keys(digitvalues)
-            grval = 1 / digitvalues[gr[1]]
-            push!(pieces, grval)
-        end
+    if !(istick(s[end]))
+        throw(DomainError("String not marked with fraction tick: $(s)"))
     end
-    pieces
+    
+    if s[1] == ONE_HALF
+        1 /2
+    
+    elseif s[1] == TWO_THIRDS
+        2 / 3
+
+    elseif s[1]  == THREE_FOURTHS
+        3 / 4
+        
+    else
+        @debug("Get int value of $(s)")
+        1 / intvalue(s)        
+   
+    end
 end

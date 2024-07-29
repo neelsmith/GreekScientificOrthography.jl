@@ -30,8 +30,10 @@ $(SIGNATURES)
 """
 function isinteger(s)
     
-    @info("Look at $(s). Ends with tick? $(s[end])")
-    if s == "Μ"  # upper case Mu, unicode x039c
+    @debug("Look at integer string $(s). Ends with tick? $(s[end])")
+    if endswith(s, "$(NUMERIC_TICK)$(NUMERIC_TICK)")
+        false
+    elseif s == "Μ"  # upper case Mu, unicode x039c
         true
 
     elseif s[1] == 'Μ' && s[end] == '^'
@@ -41,6 +43,7 @@ function isinteger(s)
         true
 
     else
+        @debug("Not an int.")
         false
     end
 end

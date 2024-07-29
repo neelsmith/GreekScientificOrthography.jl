@@ -1,31 +1,10 @@
 ---
-title: Tutorials
+title: Hands-on tutorials
 ---
 
 
-## Quick start
-
-- Validate the orthography of a string:
-
-```{julia}
-using GreekScientificOrthography, Orthography
-ortho = stemortho()
-
-archimedes = "ἡ ΓΕ πρὸς ΓΗ μείζονα λόγον ἔχει ἤπερ φοαʹ πρὸς ρνγʹ."
-validstring(archimedes, ortho)
-```
 
 
-- Tokenize a string:
-
-```{julia}
-tkns = tokenize(archimedes, ortho)
-```
-
-
-## Hands-on tutorials
-
-
-- [validating and tokenizing strings](./tokens.qmd)
-- [formatting numeric tokens](./numbers.qmd)
+- [Validating and tokenizing strings](./tokens.qmd)
+- [Evaluating numeric values](./numbers.qmd)
 
