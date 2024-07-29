@@ -49,11 +49,7 @@ Astronomical symbols are represented by single Unicode codepoints such as `🜚�
 
 In contrast to the other token types, the syntax of numeric values and mathematical figure labels is case-sensitive.
 
-Integer values in the Milesian notational system are written using 27 alphabetic or archaic alphabetic characters, followed by the numeric marker 'ʹ' (Unicode x0374).  (See a [tutorial on writing numbers](../tutorials/numbers.qmd).)  A comma separates digits for ones, tens and hundreds (to the right of the comma) from digits for thousands (left of the commma). `Μʹ` is the value for "myriad," 10,000. `μ` is the digit for 40.
+Integer values in the Milesian notational system are written using 27 alphabetic or archaic alphabetic characters, followed by the numeric marker 'ʹ' (Unicode x0374).  (See full documentation in a [guide to writing numbers](../guides/numbers.qmd).)  A comma separates digits for ones, tens and hundreds (to the right of the comma) from digits for thousands (left of the commma). `Μʹ` is the value for "myriad," 10,000. `μ` is the digit for 40.
 
 Mathematical figure labels are defined as strings of upper-case purely alphabetic characters, without any breathing or accents.  The string `Ἡ` is a lexical token (the nominative feminine singular of the article, in upper case), while `Η` is a figure label, "eta". 
 
-
-## Work in progress
-
-Support for tokenizing fractions and integer values greater than  9,999 is planned for the next release.

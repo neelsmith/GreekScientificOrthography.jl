@@ -4,8 +4,31 @@ title: "GreekScientificOrthography.jl"
 
 > An orthographic system for ancient Greek mathematical and scientific texts.
 
+
+## Quick start: tokenization
+
+Validate the orthography of a string:
+
+```{julia}
+using GreekScientificOrthography, Orthography
+ortho = stemortho()
+
+archimedes = "ἡ ΓΕ πρὸς ΓΗ μείζονα λόγον ἔχει ἤπερ φοαʹ πρὸς ρνγʹ."
+validstring(archimedes, ortho)
+```
+
+
+Tokenize a string:
+
+```{julia}
+tkns = tokenize(archimedes, ortho)
+```
+
+
+
+## Documentation
+
 | | Learning the package | Using the package |
 | --- | --- | --- |
 | **Hands-on** |  Try a [tutorial](./tutorials/) to start using  the package  | Find [recipes](./guides/) for specific tasks |
 | **Cognition** | The [orthography of Greek math and science](./concepts/)   | See [reference information](./reference/) (including API documentation for all exported functions) |
-

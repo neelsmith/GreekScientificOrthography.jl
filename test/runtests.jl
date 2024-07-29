@@ -5,3 +5,4 @@ using Unicode
 
 
 include("test_tokenization.jl")
+include("test_milesian.jl")

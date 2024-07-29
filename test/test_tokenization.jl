@@ -56,16 +56,23 @@ end
     @test tokencategory(hundreds_tkns[1]) isa MilesianIntegerToken
 
     myriads = "Μ^β^"
-    @test_broken validstring(myriads, ortho) # == 20,000
+    @test validstring(myriads, ortho) # == 20,000
     myriads_tkns = tokenize(myriads, ortho)
     @test length(myriads_tkns) == 1
-    @test_broken tokencategory(myriads_tkns[1]) isa MilesianIntegerToken
+    @test tokencategory(myriads_tkns[1]) isa MilesianIntegerToken
 
 
     fraction = "η″"
-    @test_broken validstring(fraction, ortho) # == 1/8
+    @test validstring(fraction, ortho) # == 1/8
     fraction_tkns = tokenize(fraction, ortho)
     @test length(fraction_tkns) == 1
-    @test_broken tokencategory(fraction_tkns[1]) isa MilesianFractionToken
+    @test tokencategory(fraction_tkns[1]) isa MilesianFractionToken
+
+
+    ouden = "Οʹ"
+    @test validstring(ouden, ortho)
+    ouden_tkns = tokenize(ouden, ortho)
+    @test length(ouden_tkns) == 1
+    @test tokencategory(ouden_tkns[1]) isa MilesianIntegerToken
 
 end

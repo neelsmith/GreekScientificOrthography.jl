@@ -2,14 +2,18 @@
 title: "Guides"
 ---
 
-Recipe book for more complex tasks using `GreekScientificOrthography.jl` can be added here.
+Recipe book for more complex tasks using `GreekScientificOrthography.jl`:
 
 
-::: {.callout-note title="TBA"}
-Add guides here for
+- [Formatting numbers in Milesian notation](./numbers.qmd)
 
+
+
+
+
+::: {.callout-note title="Planned additions"}
 
 1. the complicated interactions that can happen with Unicode equivalence using modifying and non-modifying characters for prime, double prime, and Greek numeric marker
-2. implementing Archimedes' system of writing arbitrarily large numbers
+2. a note on Archimedes' system of writing arbitrarily large numbers, and on the normal practice of using hexadecimal digits for fractional values (firsts, seconds, thirds... )
 
 :::
